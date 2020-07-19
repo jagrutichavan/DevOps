@@ -1,0 +1,17 @@
+	- name: First play to work with NTP
+	  hosts: all
+	  vars:
+	    - pkg1: ntp
+	
+	  tasks:
+	    - name: Adding  the {{ pkg1 }} package
+	      yum: name={{ pkg1 }} state=present
+	    - name: Configure service
+	      copy: src="/root/ntp.conf" dest="/etc/ntp.conf"
+	      notify: restart-ntp
+	    - name: Start service
+	      service: name=ntpd state=started
+	
+	  handlers:
+	    - name: restart-ntp
+        service: name=ntpd state=restarted
