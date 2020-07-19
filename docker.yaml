@@ -1,11 +1,5 @@
-	- name: First play to work with NTP
-	  hosts: all	
-	  tasks:
-	    - name: Adding  the ntp package
-	      yum: name=ntp state=present
-	    - name: Configure service
-	      copy: src="/root/ntp.conf" dest="/etc/ntp.conf"
-	    - name: Start service
-	      service: name=ntpd state=started
-	    - name: Add User
-	      user: name=jagrutisp state=present
+- name: First play to work with NTP
+  hosts: all	
+  tasks:
+    - name: Add User
+      user: name=jagrutisp state=present
